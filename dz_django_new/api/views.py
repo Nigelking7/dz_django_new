@@ -9,7 +9,7 @@ from api.models import ApiUser, Good, Storage
 
 class UserModelViewSet(viewsets.ModelViewSet):
     queryset = ApiUser.objects.all()
-    http_method_names = ['post', "path", "get", 'delete']
+    http_method_names = ['post', "path", "get"]
     serializer_class = UserSerializer
 
 
