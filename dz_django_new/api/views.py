@@ -51,6 +51,7 @@ class StorageViewSet(viewsets.ModelViewSet):
         else:
             return Response(status=status.HTTP_403_FORBIDDEN)
 
+
     @action(detail=True, methods=['post'])
     def tostorage(self, request, pk=None):
         if request.user.choice == "P":
