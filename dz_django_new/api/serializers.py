@@ -45,4 +45,9 @@ class GoodSerializer(serializers.ModelSerializer):
 class StorageSerializer(serializers.ModelSerializer):
     class Meta:
         model = Storage
-        fields = ["name", "goods"]
+        fields = ['name', "goods"]
+
+
+class FromAndToStorageSerializer(serializers.Serializer):
+    good = serializers.CharField()
+    quantity = serializers.IntegerField()

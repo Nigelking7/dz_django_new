@@ -20,3 +20,12 @@ class Storage(models.Model):
 class Good(models.Model):
     name = models.CharField(max_length=120)
     # quantity = models.PositiveIntegerField()
+
+
+
+#class toandfromstorage(models.Model):
+#    good = models.CharField(max_length=120)
+#    quantity = models.IntegerField()
+
+
+
