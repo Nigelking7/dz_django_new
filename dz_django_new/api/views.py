@@ -1,5 +1,3 @@
-from django.http import JsonResponse
-
 from rest_framework import status
 from rest_framework import viewsets
 from rest_framework.decorators import action
@@ -20,9 +18,6 @@ class GoodViewSet(viewsets.ModelViewSet):
     serializer_class = GoodSerializer
 
 
-
-
-
 class StorageViewSet(viewsets.ModelViewSet):
     queryset = Storage.objects.all()
     serializer_class = StorageSerializer
@@ -33,8 +28,6 @@ class StorageViewSet(viewsets.ModelViewSet):
 
             data = request.data
             serializer = FromAndToStorageSerializer(data=data)
-
-
 
             if serializer.is_valid():
                 good = serializer.validated_data['good']
@@ -50,11 +43,11 @@ class StorageViewSet(viewsets.ModelViewSet):
                     storage_instance.goods[good] -= quantity
                     storage_instance.save()
                 else:
-                    return JsonResponse({'error': 'Insufficient quantity'}, status=404)
+                    return Response(status=status.HTTP_400_BAD_REQUEST)
                 return Response(status=status.HTTP_200_OK)
 
             else:
-                return JsonResponse({'error': 'Invalid data'}, status=400)
+                return Response(status=status.HTTP_400_BAD_REQUEST)
         else:
             return Response(status=status.HTTP_403_FORBIDDEN)
 
@@ -81,19 +74,8 @@ class StorageViewSet(viewsets.ModelViewSet):
                     storage_instance.goods[good] += quantity
                     storage_instance.save()
                 return Response(status=status.HTTP_200_OK)
+
             else:
-                return JsonResponse({'error': 'Invalid data'}, status=400)
+                return Response(status=status.HTTP_400_BAD_REQUEST)
         else:
             return Response(status=status.HTTP_403_FORBIDDEN)
-
-
-"""
-        try:
-            storage = Storage.objects.get(pk=pk)
-        except Storage.DoesNotExist:
-            return HttpResponse(status=404)
-        # Логика, использующая значение pk
-        # Например, возвращение фильтрованного queryset по значению pk
-    # return JsonResponse(serializer.errors, status=400)
-
-"""
