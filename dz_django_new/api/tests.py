@@ -4,11 +4,16 @@ from api.models import ApiUser, Storage, Good
 
 class YourModelTests(TestCase):
     def setUp(self):
-        self.user1 = ApiUser.objects.create_user(username='TestUser1', password='123123',
-                                                 email="parshyn4@gmail.com", choice="C")
-        self.user2 = ApiUser.objects.create_user(username='TestUser2', password='123123',
-                                                 email="parshyn9@gmail.com", choice="P")
-        self.storage = Storage.objects.create(name='TestStorage', goods={"good1": 120})
+        self.user1 = ApiUser.objects.create_user(username='TestUser1',
+                                                 password='123123',
+                                                 email="parshyn4@gmail.com",
+                                                 choice="C")
+        self.user2 = ApiUser.objects.create_user(username='TestUser2',
+                                                 password='123123',
+                                                 email="parshyn9@gmail.com",
+                                                 choice="P")
+        self.storage = Storage.objects.create(name='TestStorage',
+                                              goods={"good1": 120})
         self.good = Good.objects.create(name="TestGood")
         self.client = Client()
 
@@ -55,11 +60,13 @@ class YourModelTests(TestCase):
     def test_index_fromStorage_put_authorized(self):
         url = f'/storage/{1}/fromstorage/'
         self.client.login(username='TestUser2', password='123123')
-        response = self.client.post(url, data={"good": "good2", "quantity": 190})
+        data = {"good": "good2", "quantity": 190}
+        response = self.client.post(url, data=data)
         self.assertEqual(response.status_code, 403)
 
     def test_index_toStorage_put_authorized(self):
         url = f'/storage/{1}/tostorage/'
         self.client.login(username='TestUser1', password='123123')
-        response = self.client.post(url, data={"good": "good2", "quantity": 190})
+        data = {"good": "good2", "quantity": 190}
+        response = self.client.post(url, data=data)
         self.assertEqual(response.status_code, 403)

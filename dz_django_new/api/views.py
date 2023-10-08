@@ -2,7 +2,10 @@ from rest_framework import status
 from rest_framework import viewsets
 from rest_framework.decorators import action
 from rest_framework.response import Response
-from api.serializers import UserSerializer, GoodSerializer, StorageSerializer, FromAndToStorageSerializer
+from api.serializers import (UserSerializer,
+                             GoodSerializer,
+                             StorageSerializer,
+                             FromAndToStorageSerializer)
 from api.models import ApiUser, Good, Storage
 
 

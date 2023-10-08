@@ -9,7 +9,9 @@ class UserSerializer(serializers.Serializer):
     email = serializers.EmailField(validators=[
         validators.UniqueValidator(ApiUser.objects.all())
     ])
-    password = serializers.CharField(min_length=6, max_length=20, write_only=True)
+    password = serializers.CharField(min_length=6,
+                                     max_length=20,
+                                     write_only=True)
     choice = serializers.ChoiceField(choices=ApiUser.choice_type)
 
     def update(self, instance, validated_data):
