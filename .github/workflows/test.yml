@@ -44,4 +44,3 @@ jobs:
 
     - name: Run Code Style Check (Using Flake8)
       run: flake8 dz_django_new/
-
