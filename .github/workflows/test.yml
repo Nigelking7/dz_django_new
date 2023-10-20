@@ -3,7 +3,7 @@ name: Pylint
 on: [push]
 
 jobs:
-  pylint:
+  build:
     runs-on: ubuntu-latest
     strategy:
       matrix:
@@ -22,9 +22,9 @@ jobs:
         python -m pip install --upgrade pip
         pip install -r requirements.txt
 
-    - name: Run Pylint
-      run: pylint dz_django_new/manage.py
-
+    - name: Run unit tests
+      run: python dz_django_new/manage.py test api.tests
+      
   code-style-check:
     runs-on: ubuntu-latest
     steps:
