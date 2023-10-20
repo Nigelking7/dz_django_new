@@ -24,4 +24,4 @@ jobs:
         pylint $(git ls-files '*.py')
     - name: Run tests
       run: |
-        python -m pytest path/to/your/test_file.py  
+        python -m pytest dz_django_new/api/tests.py  
